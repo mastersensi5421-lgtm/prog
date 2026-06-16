@@ -2,92 +2,56 @@
 
 typedef struct{
     char nome[50];
-    int pontos;
-    int vitorias;
-} Jogador;
+    float nota;
+} Aluno;
 
 int main(){
 
     int n;
 
-    printf("Quantos jogadores? ");
+    printf("Quantos alunos? ");
     scanf("%d", &n);
 
-    Jogador ranking[n];
+    Aluno turma[n];
 
     for(int i = 0; i < n; i++){
 
         printf("Nome: ");
-        scanf("%49s", ranking[i].nome);
+        scanf("%49s", turma[i].nome);
 
-        printf("Pontos: ");
-        scanf("%d", &ranking[i].pontos);
-
-        printf("Vitorias: ");
-        scanf("%d", &ranking[i].vitorias);
+        printf("Nota: ");
+        scanf("%f", &turma[i].nota);
     }
 
-    int maiorPontosIndice = 0;
-    int maiorVitoriasIndice = 0;
-
-    int somaVitorias = 0;
-
-    printf("\n%-20s %-10s %-10s\n",
-           "NOME", "PONTOS", "VITORIAS");
-
-    printf("---------------------------------------------\n");
+    int maiorIndice = 0;
+    int menorIndice = 0;
 
     for(int i = 0; i < n; i++){
 
-        printf("%-20s %-10d %-10d\n",
-               ranking[i].nome,
-               ranking[i].pontos,
-               ranking[i].vitorias);
+        if(turma[i].nota >
+           turma[maiorIndice].nota){
 
-        somaVitorias += ranking[i].vitorias;
-
-        if(ranking[i].pontos >
-           ranking[maiorPontosIndice].pontos){
-
-            maiorPontosIndice = i;
+            maiorIndice = i;
         }
 
-        if(ranking[i].vitorias >
-           ranking[maiorVitoriasIndice].vitorias){
+        if(turma[i].nota <
+           turma[menorIndice].nota){
 
-            maiorVitoriasIndice = i;
+            menorIndice = i;
         }
     }
 
-    float mediaVitorias =
-        (float)somaVitorias / n;
+    printf("\nAluno com maior nota:\n");
 
-    int acimaMedia = 0;
+    printf("%s - %.2f\n",
+           turma[maiorIndice].nome,
+           turma[maiorIndice].nota);
 
-    for(int i = 0; i < n; i++){
+    printf("\nAluno com menor nota:\n");
 
-        if(ranking[i].vitorias > mediaVitorias){
-            acimaMedia++;
-        }
-    }
-
-    printf("\nJogador com mais pontos: %s\n",
-           ranking[maiorPontosIndice].nome);
-
-    printf("Pontos: %d\n",
-           ranking[maiorPontosIndice].pontos);
-
-    printf("\nJogador com mais vitorias: %s\n",
-           ranking[maiorVitoriasIndice].nome);
-
-    printf("Vitorias: %d\n",
-           ranking[maiorVitoriasIndice].vitorias);
-
-    printf("\nMedia de vitorias: %.2f\n",
-           mediaVitorias);
-
-    printf("Jogadores acima da media de vitorias: %d\n",
-           acimaMedia);
+    printf("%s - %.2f\n",
+           turma[menorIndice].nome,
+           turma[menorIndice].nota);
 
     return 0;
 }

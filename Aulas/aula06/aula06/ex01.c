@@ -2,78 +2,38 @@
 
 typedef struct{
     char nome[50];
-    float nota;
-} Aluno;
+    float preco;
+    int quantidade;
+} Produto;
 
 int main(){
 
-    int n;
+    Produto p;
 
-    printf("Quantos alunos? ");
-    scanf("%d", &n);
+    printf("Nome: ");
+    scanf("%49s", p.nome);
 
-    Aluno turma[n];
+    printf("Preco: ");
+    scanf("%f", &p.preco);
 
-    for(int i = 0; i < n; i++){
+    printf("Quantidade: ");
+    scanf("%d", &p.quantidade);
 
-        printf("Nome: ");
-        scanf("%49s", turma[i].nome);
+    float valorTotal =
+        p.preco * p.quantidade;
 
-        printf("Nota: ");
-        scanf("%f", &turma[i].nota);
-    }
+    printf("\nNome: %s\n", p.nome);
 
-    float soma = 0;
+    printf("Preco: R$ %.2f\n",
+           p.preco);
 
-    int maiorIndice = 0;
-    int menorIndice = 0;
+    printf("Quantidade: %d\n",
+           p.quantidade);
 
-    for(int i = 0; i < n; i++){
+    printf("---------------------------------\n");
 
-        soma += turma[i].nota;
-
-        if(turma[i].nota > turma[maiorIndice].nota){
-            maiorIndice = i;
-        }
-
-        if(turma[i].nota < turma[menorIndice].nota){
-            menorIndice = i;
-        }
-    }
-
-    float media = soma / n;
-
-    int acimaMedia = 0;
-
-    for(int i = 0; i < n; i++){
-
-        if(turma[i].nota > media){
-            acimaMedia++;
-        }
-    }
-
-    printf("\n%-20s %5s\n", "NOME", "NOTA");
-    printf("-----------------------------\n");
-
-    for(int i = 0; i < n; i++){
-
-        printf("%-20s %.2f\n",
-               turma[i].nome,
-               turma[i].nota);
-    }
-
-    printf("\nMedia da turma: %.2f\n", media);
-
-    printf("\nMaior nota: %s (%.2f)\n",
-           turma[maiorIndice].nome,
-           turma[maiorIndice].nota);
-
-    printf("Menor nota: %s (%.2f)\n",
-           turma[menorIndice].nome,
-           turma[menorIndice].nota);
-
-    printf("\nAlunos acima da media: %d\n",
-           acimaMedia);
+    printf("Valor total em estoque: R$ %.2f\n",
+           valorTotal);
 
     return 0;
 }
